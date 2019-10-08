@@ -38,6 +38,11 @@ public:
 		_root->preorder(visitor, std::forward<Args>(args)...);
 	}
 
+	struct Point {
+		int x = 0;
+		int y = 0;
+	};
+
 	class Node : public std::enable_shared_from_this <Node> {
 	public:
 		Node() = delete;
@@ -54,7 +59,7 @@ public:
 		Node(T t, std::shared_ptr<Node> parent) {
 			key_ = std::move(t);
 			this->parent_ = parent;
-			this->depth_ = parent->depth_ + 1;
+			this->coord_.y = parent->coord_.y + 1;
 		}
 
 		T& key() {
@@ -65,12 +70,8 @@ public:
 			return const_cast<Node*>(this)->key_();
 		}
 
-		auto depth() {
-			return depth_;
-		}
-
-		auto lateral() {
-			return lateral_;
+		auto coord() {
+			return coord_;
 		}
 
 		auto left() {
@@ -110,7 +111,7 @@ public:
 				if (right_) return right_->insert(t);
 				else {
 					right_ = make_shared (t, ptr());
-					right_->lateral_ = lateral_ + 1;
+					right_->coord_.x = coord_.x + 1;
 					return true;
 				}
 			}
@@ -118,7 +119,7 @@ public:
 				if (left_) return left_->insert(t);
 				else {
 					left_ = make_shared (t, ptr());
-					left_->lateral_ = lateral_ - 1;
+					left_->coord_.x = coord_.x - 1;
 					return true;
 				}
 			}
@@ -134,10 +135,9 @@ public:
 		}
 	private:
 		T key_;
-		size_t depth_ = 0;
 		/*useful for visual representation.*/
-		/*lateral < 0 == left side, lateral > 0 == right, root == 0*/
-		int lateral_ = 0;
+		/*y < 0 == left side, y > 0 == right, root == 0*/
+		Point coord_;
 		std::shared_ptr<Node> left_;
 		std::shared_ptr<Node> right_;
 		std::weak_ptr<Node> parent_;
