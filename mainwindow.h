@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <memory>
 
 namespace Ui {
 class MainWindow;
@@ -13,14 +14,17 @@ class MainWindow : public QMainWindow
 
 public:
 	explicit MainWindow(QWidget *parent = nullptr);
-	~MainWindow();
+	virtual ~MainWindow();
 
 private slots:
 
 	void on_pushButtonBSTGenerate_clicked();
 
 private:
-	Ui::MainWindow *ui;
+	void resetScene();
+	std::unique_ptr<Ui::MainWindow> ui;
+	struct impl;
+	std::unique_ptr<impl> pimpl;
 };
 
 #endif // MAINWINDOW_H

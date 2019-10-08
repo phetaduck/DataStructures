@@ -103,7 +103,7 @@
          </widget>
         </item>
         <item row="2" column="0" colspan="4">
-         <widget class="QGraphicsView" name="graphicsViewBSTree"/>
+         <widget class="GraphView" name="graphicsViewBSTree"/>
         </item>
        </layout>
       </widget>
@@ -132,6 +132,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>GraphView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">graph_view.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

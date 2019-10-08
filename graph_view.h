@@ -1,12 +1,18 @@
 #ifndef GRAPH_VIEW_H
 #define GRAPH_VIEW_H
 
-#include <QWidget>
+#include <QGraphicsView>
 
-class GraphView : public QGraphicsView
+class NodeView;
+
+class GraphView
+		: public QGraphicsView
 {
+	Q_OBJECT
 public:
-	GraphView();
+	GraphView(QWidget* parent = nullptr);
+	void addItem(NodeView* nodeView);
+	void clear();
 };
 
 #endif // GRAPH_VIEW_H

@@ -27,11 +27,17 @@ CONFIG += c++17
 SOURCES += \
 								main.cpp \
 								mainwindow.cpp \
-    src/BSTree.cpp
+				src/BSTree.cpp \
+    node_view.cpp \
+    graph_view.cpp \
+    edge_view.cpp
 
 HEADERS += \
 								mainwindow.h \
-    src/BSTree.h
+				src/BSTree.h \
+    node_view.h \
+    graph_view.h \
+    edge_view.h
 
 FORMS += \
 								mainwindow.ui
